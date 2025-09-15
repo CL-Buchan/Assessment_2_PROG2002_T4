@@ -1,0 +1,21 @@
+@layer components {
+    .page-events .card-container {
+        @apply p-10;
+    }
+    
+    .page-events .card {
+        @apply !flex-col items-center;
+    }
+
+    .page-events .card-img { 
+        @apply !w-[400px];
+    }
+
+    .page-events .created-at {
+        @apply font-light text-gray-600 opacity-80;
+    }
+
+    .event-cards {
+        @apply flex flex-col gap-20;
+    }
+}

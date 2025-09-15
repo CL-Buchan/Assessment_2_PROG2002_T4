@@ -1,0 +1,97 @@
+/* 
+    Run for every change (stops when terminal closes):
+    npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch 
+*/
+
+@import "tailwindcss";
+
+/* Custom themes */
+
+@theme {
+    --breakpoint-2xl: 1444px;
+    --shadow-3xl : -10px 20px 35px rgba(0, 0, 0, 0.325); 
+}
+
+/* Custom Styles */
+
+h1 {
+    @apply font-bold text-4xl;
+}
+
+h2 {
+    @apply font-bold text-3xl;
+}
+
+.nav {
+    @apply flex flex-row gap-10 m-10 mx-auto p-6 w-fit rounded-3xl shadow-3xl;
+}
+
+.nav-icons {
+    @apply w-6 h-6;
+}
+
+.nav li {
+    @apply duration-300 ease-in-out hover:scale-110;
+}
+
+.hero {
+    @apply flex flex-col py-10 px-5;
+}
+
+.hero-card {
+    @apply flex flex-col gap-8 mt-10 pb-10 2xl:self-center;
+}
+
+.upcoming-events {
+    @apply flex flex-col mt-10 ml-5 mb-10 mr-5;
+}
+
+.card-container { 
+    @apply flex flex-col justify-center gap-8 mt-10 pb-10; 
+} 
+
+.card { 
+    @apply flex flex-row gap-5 rounded-2xl w-full min-w-[300px] 2xl:self-center;
+} 
+
+.card-template {
+    @apply hidden;
+}
+
+.card-header { 
+    @apply flex flex-col gap-3 mb-5 p-5;
+} 
+
+.card-title { 
+    @apply flex flex-col gap-5;
+} 
+
+.card-title h2 { 
+    @apply font-bold text-3xl;
+}
+
+.location-text {
+    @apply font-light text-gray-600 opacity-80;
+}
+
+.card-img { 
+    @apply w-48 lg:w-72 h-auto rounded-2xl object-cover shadow-3xl;
+}
+
+.search-area {
+    @apply flex flex-col;
+}
+
+#search-form {
+    @apply flex flex-col m-14 gap-8 self-center items-center w-[500px];
+}
+
+#search-form input {
+    @apply text-center p-3 w-[500px] rounded-3xl shadow-3xl;
+}
+
+#search-form button {
+    @apply p-3 rounded-3xl shadow-3xl hover:scale-110 duration-300 ease-in-out text-sm;
+}
+
+@import "./custom-searches.css";
