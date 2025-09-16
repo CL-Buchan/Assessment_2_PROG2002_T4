@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/src/output.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <title>Events Main Page</title>
 </head>
 <body>
@@ -16,15 +19,23 @@
             </ul>
         </nav>
     </header>
-    <main class="m-10">
+    <main class="flex flex-col gap-10">
         <div class="hero">
             <div class="hero-card">
-                <h1 class="text-4xl font-bold">Want to Find Events Near You?</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum nobis tenetur voluptates odio quas cumque a obcaecati consequuntur, itaque error, repellat sed! Voluptatem mollitia consequatur voluptatibus ut commodi optio enim.</p>
+                <h1 class="text-4xl font-bold">Welcome, Find Events Near You.</h1>
+                <p>Look for events around the Gold Coast region. Search for an event or browse our events page for further events, and event details.</p>
             </div>
         </div>
+        <div class="search-area">
+            <h2>Can't find what you are looking for?</h2>
+            <form id="search-form">
+                <span class="flex flex-row gap-10 items-center"><img class="w-10 h-10" src="/icons/Search-1--Streamline-Ultimate.png"><input id="search-bar" type="text" name="search-bar" placeholder="What event are you looking for?"></span>
+                <button class="hover:bg-black hover:text-white" id="search-bttn">Search</button>
+            </form>
+            <p class="search-t-more">Checkout the events <a href="/client-side/public/event_search.html">page</a> for more details.</p>
+        </div>
         <div class="upcoming-events">
-            <h2 class="font-bold text-3xl">Upcoming Events</h2>
+            <h2 class="font-bold !text-3xl lg:!text-4xl">Upcoming Events</h2>
             <div class="card-container">
                 <div class="card">
                     <img class="card-img" id="event-image" src="https://assets.atdw-online.com.au/images/fa7921a1f5698483ea8302036ab6d8ff.jpeg?q=eyJ0eXBlIjoibGlzdGluZyIsImxpc3RpbmdJZCI6IjU2YjI1ZGZhYWVlZWFhZjc3M2NmMDFkNiIsImRpc3RyaWJ1dG9ySWQiOiI1NmIxZWI5MzQ0ZmVjYTNkZjJlMzIwY2IiLCJhcGlrZXlJZCI6IjU2YjFlZmVlMGNmMjEzYWQyMGRkMjE3MCJ9&rect=100%2C0%2C1600%2C1200&rot=360&w=1200" alt="">
@@ -38,14 +49,8 @@
                 </div>
             </div>
         </div>
-        <div class="search-area">
-            <h2>Search Events</h2>
-            <form id="search-form">
-                <input type="text" name="search-bar" placeholder="Search an event!">
-                <button>Submit</button>
-            </form>
-        </div>
     </main>
     <footer></footer>
+    <script src="/scripts/search-event.js"></script>
 </body>
 </html>

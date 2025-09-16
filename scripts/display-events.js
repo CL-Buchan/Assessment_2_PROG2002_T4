@@ -24,13 +24,13 @@ document.addEventListener('DOMContentLoaded', () => {
         card.classList.remove('card-template', 'hidden');
 
         // Calls for db values OR uses default strings
-        card.querySelector('.event-title').textContent = event.EventName || 'Untitled Event';
-        card.querySelector('.location-text').textContent = event.Location || 'Unknown location';
-        card.querySelector('.created-at').textContent = `Event created at: ${event.CreatedAt}` || 'No description available';
+        card.querySelector('.event-title').textContent = event.eventname || 'Untitled Event';
+        card.querySelector('.location-text').textContent = event.location || 'Unknown location';
+        card.querySelector('.created-at').textContent = `Event created at: ${new Date(event.createdat).toLocaleDateString()}` || 'No description available'; // Referenced formatting date to string from https://www.w3schools.com/jsref/jsref_tostring_date.asp
         
         const img = card.querySelector('.card-img');
-        img.src = event.ImageURL || 'https://placehold.co/300x200/png'; // Uses a placeholder image for the meantime from: https://placehold.co/
-        img.alt = event.EventName || 'Event image';
+        img.src = event.imageurl || 'https://placehold.co/300x200/png'; // Uses a placeholder image for the meantime from: https://placehold.co/
+        img.alt = event.eventname || 'Event image';
 
         // Adds all cards to cardContain <div>
         cardContainer.appendChild(card);

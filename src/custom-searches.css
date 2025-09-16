@@ -4,7 +4,7 @@
     }
     
     .page-events .card {
-        @apply !flex-col items-center;
+        @apply !flex-col items-center !shadow-none;
     }
 
     .page-events .card-img { 

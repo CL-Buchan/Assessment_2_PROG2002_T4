@@ -1,14 +1,18 @@
 // Import express and make app instance 
 const express = require('express'); 
+const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
 const port = 8080; // Port number (HTTP or HTTPS)
+
+app.use(cors());
 
 // Bodyparse implementation for parsing req.body as JSON
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-const eventsAPI = require('../api/db-api'); // Use db-API
+// Use db-API
+const eventsAPI = require('../api/db-api');
 
 // Router
 app.use("/events/db", eventsAPI);

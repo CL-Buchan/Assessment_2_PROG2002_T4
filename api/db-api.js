@@ -1,5 +1,5 @@
-const dbConnection = require('../databaseMySql/database'); 
-const connection = dbConnection.getConnection(); // Calls getConnection() from database.js
+const pgCon = require('../postgresql/app'); 
+const connection = pgCon.getConnection(); // Calls getConnection() from database.js
 
 // Imports express and makes Router() instance
 const express = require('express');
@@ -7,16 +7,13 @@ const express = require('express');
 // Used for mapping endpoints (GET, PUT, POST etc)
 const router = express.Router();
 
-connection.connect(); // Opens connection
-
 // GET method for retrieving data from DB
 router.get('/', (req, res) => {
     connection.query('SELECT * FROM event', (err, result) => {
         if (err) {
-            console.error('Error getting data!', err);
             return res.status(500).send({error: 'Database error'});
         } else {
-            return res.status(200).send({message: 'Successful GET', events: result});
+            return res.status(200).send({message: 'Successful GET', events: result.rows});
         }
     });
 });
@@ -25,14 +22,14 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 	const {EventName, Location, EventDate} = req.body
 
-    const postSql = 'INSERT INTO event (EventName, Location, EventDate) VALUES (?, ?, ?)';
+    // Uses placeholder $ symbol for values unpacked from req.body
+    const postSql = 'INSERT INTO event (eventName, location, eventDate) VALUES ($1, $2, $3) RETURNING id';
 
     connection.query(postSql, [EventName, Location, EventDate], (err, result) => {
         if (err) {
-            console.log('Error while retrieve the data' + err);
             return res.status(500).send({error: 'Database error'});
         } else {
-            return res.status(201).send({message: 'Successful insertion', id: result.insertId});
+            return res.status(201).send({message: 'Successful insertion', id: result.rows[0].id});
         }
     });
 });
@@ -41,14 +38,13 @@ router.post('/', (req, res) => {
 router.delete('/', (req, res) => {
     const {EventName} = req.body;
 
-    const deleteSql = 'DELETE from event WHERE EventName = ?';
+    const deleteSql = 'DELETE FROM event WHERE eventname = $1';
 
     connection.query(deleteSql, [EventName], (err, result) => {
         if (err) {
-            console.log('Error while retrieve the data' + err);
             return res.status(500).send({error: 'Database error'});
         } else {
-            return res.status(200).send({message: 'Successful deletion', affectedRows: result.affectedRows});
+            return res.status(200).send({message: 'Successful deletion', affectedRows: result.rowCount});
         }
     });
 });
