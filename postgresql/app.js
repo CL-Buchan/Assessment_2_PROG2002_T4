@@ -10,8 +10,18 @@ const client = new Client({
     port: 5432,
 });
 
-// Make connection
-client.connect();
+// Uses async await to await for connection and check for connection error if any
+const connectDb = async () => {
+    try {
+        // Make connection
+        await client.connect();
+        console.log('Database connected.')
+    } catch (error) {
+        console.log('Connection failed', error)
+    }
+}
+
+connectDb();
 
 // Export the connection
 module.exports = {
