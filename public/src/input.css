@@ -1,6 +1,6 @@
 /* 
     Run for every change (stops when terminal closes):
-    npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch 
+    npx @tailwindcss/cli -i ./public/src/input.css -o ./public/src/output.css --watch 
 */
 
 @import "tailwindcss";
@@ -48,11 +48,7 @@ h2 {
 }
 
 .search-area {
-    @apply flex flex-col items-center py-20 px-20 gap-10;
-}
-
-.s-area-text {
-    @apply flex flex-col;
+    @apply flex flex-col items-center py-20 px-20;
 }
 
 .search-area h2 {
@@ -60,11 +56,11 @@ h2 {
 }
 
 #search-form {
-    @apply flex flex-col my-10 gap-8 self-center items-center w-[500px];
+    @apply flex flex-col my-10 gap-8 self-center items-center w-full;
 }
 
 #search-form input {
-    @apply text-center p-3 w-[500px] rounded-3xl shadow-3xl;
+    @apply text-center p-3 min-w-[500px] 2xl:w-[1000px] rounded-3xl shadow-3xl;
 }
 
 #search-form button {
@@ -73,6 +69,10 @@ h2 {
 
 .search-t-more {
     @apply font-light text-gray-600 opacity-80
+}
+
+.display-search {
+    @apply mt-12 mb-12;
 }
 
 .upcoming-events {
@@ -88,7 +88,7 @@ h2 {
 } 
 
 .card { 
-    @apply flex flex-row gap-5 rounded-2xl w-full min-w-[300px] 2xl:self-center shadow-3xl;
+    @apply flex flex-row gap-5 rounded-2xl w-full min-w-[300px] 2xl:self-center 2xl:max-w-[1200px] shadow-3xl;
 } 
 
 .card-template {
@@ -116,3 +116,4 @@ h2 {
 }
 
 @import "./custom-searches.css";
+@import "./custom-details.css";

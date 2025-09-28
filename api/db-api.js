@@ -19,8 +19,6 @@ router.get('/', async (req, res) => {
     try {
         const result = await connection.query('SELECT * FROM event');
 
-        
-
         res.status(200).send({message: 'Successful GET', events: result.rows});
     } catch (error) {
         res.status(500).send({error: 'Database error'});

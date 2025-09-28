@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Iterate through each event in events table
       events.forEach(event => {
+        
+        // Clones the card and all of its children, reference from: https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode
         const card = cardTemplate.cloneNode(true);
         card.classList.remove('card-template', 'hidden');
 
@@ -39,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.error('Error:', error);
     }
-  };
+  }
 
   // Call function
   getData();
