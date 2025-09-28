@@ -1,21 +1,25 @@
 @layer components {
-    .page-events .card-container {
-        @apply p-10;
-    }
-    
-    .page-events .card {
-        @apply !flex-col items-center !shadow-none;
+    .search-area {
+        @apply flex flex-col items-center py-20 px-20;
     }
 
-    .page-events .card-img { 
-        @apply !w-[400px];
+    .search-area h2 {
+        @apply text-3xl lg:text-4xl;
     }
 
-    .page-events .created-at {
-        @apply font-light text-gray-600 opacity-80;
+    #search-form {
+        @apply flex flex-col my-10 gap-8 self-center items-center w-full;
     }
 
-    .event-cards {
-        @apply flex flex-col gap-20;
+    #search-form input {
+        @apply text-center p-3 min-w-[500px] 2xl:w-[1000px] rounded-3xl shadow-3xl;
+    }
+
+    .search-t-more {
+        @apply font-light text-gray-600 opacity-80
+    }
+
+    .display-search {
+        @apply mt-12 mb-12;
     }
 }
