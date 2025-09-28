@@ -83,14 +83,18 @@ searchForm.addEventListener('submit', (e) => {
                 // Calls for db values OR uses default strings
                 card.querySelector('.event-title').textContent = match.eventname || 'Untitled Event';
                 card.querySelector('.location-text').textContent = match.location || 'Unknown location';
-                card.querySelector('.created-at').textContent = `Event created at: ${new Date(match.createdat).toLocaleDateString()}` || 'No description available'; // Referenced formatting date to string from https://www.w3schools.com/jsref/jsref_tostring_date.asp
-            
+                card.querySelector('.created-at').textContent = `Event created at: ${new Date(match.createdat).toLocaleDateString()}` || 'No date available'; // Referenced formatting date to string from https://www.w3schools.com/jsref/jsref_tostring_date.asp
+                card.querySelector('.event-desc').textContent = match.eventdesc || 'Description is not avaliable.';
+
                 const img = card.querySelector('.card-img');
-                img.src = match.imageurl || 'https://placehold.co/300x200/png'; // Uses a placeholder image for the meantime from: https://placehold.co/
+                img.src = match.eventimg || 'https://placehold.co/300x200/png'; // Uses a placeholder image for the meantime from: https://placehold.co/
                 img.alt = match.eventname || 'Event image';
     
                 // Adds all cards to cardContain <div>
                 displaySearch.appendChild(card);
+                
+                // Scrolls to loaded card when searched
+                card.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
 
             } else {
                 console.log('Too many cards');

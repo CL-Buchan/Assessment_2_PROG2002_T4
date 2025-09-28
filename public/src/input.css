@@ -23,8 +23,28 @@ h2 {
     @apply font-bold text-3xl;
 }
 
+h3 {
+    @apply font-bold text-xl;
+}
+
+label {
+    @apply text-lg;
+}
+
+body {
+    @apply min-h-screen flex flex-col;
+}
+
+main {
+    @apply flex-1;
+}
+
+header {
+    @apply sticky top-0 z-50 backdrop-blur-md;
+}
+
 .nav {
-    @apply flex flex-row gap-10 m-10 mx-auto p-6 w-fit rounded-3xl shadow-3xl;
+    @apply flex flex-row gap-10 mx-auto p-6 w-full rounded-b-2xl shadow-3xl;
 }
 
 .nav-icons {
@@ -40,15 +60,43 @@ h2 {
 }
 
 .hero-card {
-    @apply flex flex-col items-center mt-10 pb-10 2xl:self-center gap-10;
+    @apply flex flex-col items-center mt-10 pb-10 2xl:self-center gap-5;
 }
 
 .hero-card h1 {
     @apply font-poppins text-4xl lg:text-5xl;
 }
 
+.signup {
+    @apply flex flex-col px-20 gap-5;
+}
+
+.signup h2 {
+    @apply pb-4 text-3xl lg:text-4xl;
+}
+
+.signup form {
+    @apply flex flex-col mx-auto mt-10 pt-10 pb-10 gap-8 items-center min-w-[300px] w-[600px] 2xl:w-[900px];
+}
+
+.signup span {
+    @apply flex flex-row gap-10 w-full;
+}
+
+.signup label {
+    @apply w-20 text-left;
+}
+
+.signup input {
+    @apply flex-1 p-2 h-12 rounded-3xl shadow-3xl;
+}
+
+.signup button {
+    @apply w-fit;
+}
+
 .upcoming-events {
-    @apply flex flex-col py-20 px-20 gap-10;
+    @apply flex flex-col mb-20 py-20 px-20 gap-10;
 }
 
 .upcoming-events h2 {
@@ -56,7 +104,7 @@ h2 {
 }
 
 .card-container { 
-    @apply flex flex-col justify-center gap-8 mt-10 pb-10; 
+    @apply flex flex-col justify-center gap-8 mt-10 mx-auto pb-10; 
 } 
 
 .card { 
@@ -83,12 +131,32 @@ h2 {
     @apply font-light text-gray-600 opacity-80;
 }
 
+.created-at {
+    @apply font-light text-gray-600 opacity-80;
+}
+
 .card-img { 
     @apply w-48 lg:w-72 h-auto rounded-2xl object-cover shadow-3xl;
 }
 
 button {
     @apply py-3 px-6 rounded-3xl shadow-3xl hover:scale-110 duration-300 ease-in-out text-sm hover:bg-black hover:text-white;
+}
+
+footer {
+    @apply flex flex-row w-full min-h-[200px] gap-5 rounded-t-2xl shadow-3xl bg-[#6ca0d4] text-white;
+}
+
+.foot-card {
+    @apply p-8 flex-1 flex flex-col gap-5 2xl:self-center 2xl:max-w-[1200px] 2xl:mx-auto;
+}
+
+.foot-nav {
+    @apply flex flex-col gap-3;
+}
+
+.foot-nav li {
+    @apply duration-300 ease-in-out hover:scale-105;
 }
 
 @import "./custom-details.css";

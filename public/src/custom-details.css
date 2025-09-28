@@ -4,7 +4,7 @@
     }
 
     .page-events {
-        @apply ml-5 mr-5;
+        @apply my-30 mx-20;
     }
 
     .page-events .card-container {
@@ -17,10 +17,6 @@
 
     .page-events .card-img { 
         @apply !w-[400px];
-    }
-
-    .page-events .created-at {
-        @apply font-light text-gray-600 opacity-80;
     }
 
     .event-cards {

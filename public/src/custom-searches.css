@@ -1,14 +1,10 @@
 @layer components {
     .search-area {
-        @apply flex flex-col items-center py-20 px-20;
-    }
-
-    .search-area h2 {
-        @apply text-3xl lg:text-4xl;
+        @apply py-30 px-20 flex flex-col items-center;
     }
 
     #search-form {
-        @apply flex flex-col my-10 gap-8 self-center items-center w-full;
+        @apply mt-10 pb-10 flex flex-col gap-8 self-center items-center w-full;
     }
 
     #search-form input {
@@ -20,6 +16,6 @@
     }
 
     .display-search {
-        @apply mt-12 mb-12;
+        @apply py-30;
     }
 }
