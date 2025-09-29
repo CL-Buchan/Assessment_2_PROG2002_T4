@@ -4,7 +4,7 @@
     }
 
     .page-events {
-        @apply my-30 mx-20;
+        @apply mb-30 mx-20;
     }
 
     .page-events .card-container {

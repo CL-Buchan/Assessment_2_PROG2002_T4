@@ -17,9 +17,60 @@ eventEmitter.on('dbEvent', (event) => {
 // GET method for retrieving data from DB
 router.get('/', async (req, res) => {
     try {
-        const result = await connection.query('SELECT * FROM event');
+        const result = await connection.query(`SELECT * FROM event`);
+
+        if (result.rows.length === 0) {
+            return res.status(404).send({message: 'Event not found!'});
+        }
 
         res.status(200).send({message: 'Successful GET', events: result.rows});
+    } catch (error) {
+        res.status(500).send({error: 'Database error'});
+    }
+});
+
+
+// GET search functionality
+router.get('/search', async (req, res) => {
+    
+    // Unpacks query in object to know what its searching for 
+    const {eventid, eventname, location} = req.query;
+    
+    // Allows storage of conditions for sql query and storing of values to fill placeholders
+    const sqlCondition = [];
+    const values = [];
+
+    try {
+
+        // Adds values and condition to corresponding arrays for later use
+        if (eventid) {
+            values.push(eventid);
+            sqlCondition.push(`eventid = $${values.length}`);
+        }
+    
+        if (eventname) {
+            values.push(eventname);
+
+            // Used ILIKE to make it case insensitive. Referenced from: https://www.geeksforgeeks.org/python/postgresql-ilike-operator/ 
+            sqlCondition.push(`eventname ILIKE '%' || $${values.length} || '%'`);
+        }
+    
+        if (location) {
+            values.push(location);
+            sqlCondition.push(`location ILIKE '%' || $${values.length} || '%'`);
+        }
+
+        // If no condition is invoked error 400
+        if (sqlCondition.length == 0) {
+            return res.status(400).send({error: 'No searches provided'});
+        }
+    
+        // Constructs query for sql db search
+        let sql = 'SELECT * FROM event WHERE ' + sqlCondition.join(' AND ');
+        const result = await connection.query(sql, values);
+
+        // Sends rows from DB
+        res.status(200).send({message: 'Successful search', rows: result.rows});
     } catch (error) {
         res.status(500).send({error: 'Database error'});
     }
@@ -34,7 +85,7 @@ router.post('/', async (req, res) => {
 
     try {
         const result = await connection.query(postSql, [EventName, Location, EventDate]);
-        res.status(201).send({message: 'Successful insertion', id: result.rows[0].id});
+        res.status(201).send({message: 'Successful post', id: result.rows[0].id});
     } catch (error) {
         res.status(500).send({error: 'Database error'});
     }
