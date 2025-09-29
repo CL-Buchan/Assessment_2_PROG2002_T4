@@ -26,6 +26,19 @@
         <div class="page-events">
             <h1>Current Events</h1>
 
+            <div class="event-filters">
+                <form class="flex flex-col gap-5 mx-auto items-center">
+                    <div class="flex flex-row items-center gap-8">
+                        <label class="font-light">Event type:</label>
+                        <select name="filters" id="event-filters" class="min-w-[300px] p-2 bg-gray-100 rounded-3xl shadow-3xl">
+                            <option value="Event">Event</option>
+                            <option value="Gala">Gala</option>
+                        </select>
+                        <span class="flex flex-row gap-8"><button type="submit" class="form-button">Filter</button><button class="clear-filter">Clear filter</button></span>
+                    </div>
+                </form>
+            </div>
+
             <div class="card-container">
                 <div class="card card-template hidden">
                     <img class="card-img" id="event-image" src="https://assets.atdw-online.com.au/images/fa7921a1f5698483ea8302036ab6d8ff.jpeg?q=eyJ0eXBlIjoibGlzdGluZyIsImxpc3RpbmdJZCI6IjU2YjI1ZGZhYWVlZWFhZjc3M2NmMDFkNiIsImRpc3RyaWJ1dG9ySWQiOiI1NmIxZWI5MzQ0ZmVjYTNkZjJlMzIwY2IiLCJhcGlrZXlJZCI6IjU2YjFlZmVlMGNmMjEzYWQyMGRkMjE3MCJ9&rect=100%2C0%2C1600%2C1200&rot=360&w=1200" alt="">

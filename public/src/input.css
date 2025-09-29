@@ -40,7 +40,7 @@ main {
 }
 
 header {
-    @apply sticky top-0 z-50 backdrop-blur-md;
+    @apply sticky top-0 z-50 rounded-b-2xl backdrop-blur-md bg-white/30;
 }
 
 .nav {
@@ -68,7 +68,7 @@ header {
 }
 
 .signup {
-    @apply flex flex-col px-20 gap-5;
+    @apply flex flex-col mt-10 px-20 gap-5;
 }
 
 .signup h2 {
@@ -105,6 +105,10 @@ header {
 
 .upcoming-events h2 {
     @apply font-poppins;
+}
+
+.upcoming-events button {
+    @apply self-center;
 }
 
 .card-container { 
@@ -148,7 +152,7 @@ button {
 }
 
 footer {
-    @apply flex flex-row w-full min-h-[200px] gap-5 rounded-t-2xl shadow-3xl bg-[#6ca0d4] text-white;
+    @apply flex flex-row w-full min-h-[200px] gap-5 rounded-t-2xl shadow-3xl bg-blue-800 text-white;
 }
 
 .foot-card {

@@ -54,7 +54,7 @@ searchForm.addEventListener('submit', (e) => {
             searchBar.value = '';
 
             // Fetch data from DB for search res
-            const response = await fetch('http://localhost:8080/events/db');
+            const response = await fetch(`http://localhost:8080/events/db/search?eventname=${encodeURIComponent(formattedWords)}`);
 
             // Check if there is not a 200 response
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -62,47 +62,47 @@ searchForm.addEventListener('submit', (e) => {
             // Await response body to be parsed as JSON
 
             const data = await response.json();
-            const events = data.events;
+            const events = data.rows;
 
             // Shorthand arrow function to check if eventname is the same as the entered search
             const match = events.find(event => event.eventname === formattedWords);
 
-            if (!match) {
-                msg.innerHTML = 'No events were found...';
-                msg.style.color = 'red';
-                return;
-            }
-
             // Clones the card and all of its children, reference from: https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode
             const card = cardTemplate.cloneNode(true);
 
-            // Checks how many card divs are within my displaySearch area. If more than 2 (1 template and 1 search query), do not display
-            if (displaySearch.querySelectorAll('.card').length < 2) {
-                card.classList.remove('card-template', 'hidden');
+            if (events.length > 0) {
+                // Checks how many card divs are within my displaySearch area. If more than 2 (1 template and 1 search query), do not display
+                if (displaySearch.querySelectorAll('.card').length < 2) {
+                    card.classList.remove('card-template', 'hidden');
+        
+                    // Calls for db values OR uses default strings
+                    card.querySelector('.event-title').textContent = match.eventname || 'Untitled Event';
+                    card.querySelector('.location-text').textContent = match.location || 'Unknown location';
+                    card.querySelector('.created-at').textContent = `Event created at: ${new Date(match.createdat).toLocaleDateString()}` || 'No date available'; // Referenced formatting date to string from https://www.w3schools.com/jsref/jsref_tostring_date.asp
+                    card.querySelector('.event-desc').textContent = match.eventdesc || 'Description is not avaliable.';
     
-                // Calls for db values OR uses default strings
-                card.querySelector('.event-title').textContent = match.eventname || 'Untitled Event';
-                card.querySelector('.location-text').textContent = match.location || 'Unknown location';
-                card.querySelector('.created-at').textContent = `Event created at: ${new Date(match.createdat).toLocaleDateString()}` || 'No date available'; // Referenced formatting date to string from https://www.w3schools.com/jsref/jsref_tostring_date.asp
-                card.querySelector('.event-desc').textContent = match.eventdesc || 'Description is not avaliable.';
-
-                const img = card.querySelector('.card-img');
-                img.src = match.eventimg || 'https://placehold.co/300x200/png'; // Uses a placeholder image for the meantime from: https://placehold.co/
-                img.alt = match.eventname || 'Event image';
+                    const img = card.querySelector('.card-img');
+                    img.src = match.eventimg || 'https://placehold.co/300x200/png'; // Uses a placeholder image for the meantime from: https://placehold.co/
+                    img.alt = match.eventname || 'Event image';
+        
+                    // Adds all cards to cardContain <div>
+                    displaySearch.appendChild(card);
+                    
+                    // Scrolls to loaded card when searched
+                    card.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
     
-                // Adds all cards to cardContain <div>
-                displaySearch.appendChild(card);
-                
-                // Scrolls to loaded card when searched
-                card.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
-
+                } else {
+                    console.log('Too many cards');
+                    return;
+                }
             } else {
-                console.log('Too many cards');
-                return;
+                dataDiv.textContent = "No concert data";
             }
 
         } catch (error) {
             console.log('Error:', error);
+            msg.style.color = 'red';
+            msg.textContent = "Failed to load data";
         }
     }
 

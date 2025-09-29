@@ -1,10 +1,14 @@
 @layer components {
     .hero {
-        @apply flex flex-col gap-10;
+        @apply flex flex-col gap-10 bg-blue-800 text-white rounded-b-2xl;
+    }
+
+    .hero button {
+        @apply bg-white text-black;
     }
 
     .page-events {
-        @apply mb-30 mx-20;
+        @apply mt-15 mb-30 mx-20;
     }
 
     .page-events .card-container {
@@ -21,5 +25,9 @@
 
     .event-cards {
         @apply flex flex-col gap-20;
+    }
+
+    .event-filters {
+        @apply my-15 w-full;
     }
 }

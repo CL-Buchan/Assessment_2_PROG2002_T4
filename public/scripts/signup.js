@@ -5,8 +5,6 @@ const lastName = document.getElementsByName('last-name')[0];
 const email = document.getElementsByName('email')[0];
 const err = document.querySelector('.err-msg');
 
-const people = [];
-
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -28,7 +26,6 @@ form.addEventListener('submit', (e) => {
     
         // Add newPerson object to people array
         people.push(newPerson);
-        console.log(people);
 
         err.style.color = 'green';
         err.innerHTML = `Signup Sucessful! Thankyou for signing up ${firstName.value}!`;

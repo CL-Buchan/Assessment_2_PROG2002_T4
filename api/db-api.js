@@ -76,6 +76,39 @@ router.get('/search', async (req, res) => {
     }
 });
 
+// GET filters
+router.get('/filter', async (req, res) => {
+    const {category} = req.query;
+
+    const sqlCondition = [];
+    const values = [];
+
+    if (category) {
+        // Uses map to make new array, trims white space 
+        const categories = category.split(',').map(choice => choice.trim());
+        const placeholder = categories.map((_, i) => `$${i + 1}`);
+        sqlCondition.push(` category IN (${placeholder.join(', ')})`);
+        
+        // Array is using spread syntax: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+        values.push(...categories);
+    }
+    
+    try {
+        // If no condition is invoked error 400
+        if (sqlCondition.length == 0) {
+            return res.status(400).send({error: 'No filters provided'});
+        }
+
+        // Constructs query for sql db search
+        let sql = 'SELECT * FROM event WHERE ' + sqlCondition.join(' AND ');
+        const result = await connection.query(sql, values);
+
+        res.status(200).send({message: 'Successful filter', rows: result.rows});
+    } catch (error) {
+        res.status(500).send({error: 'Filtering error'});
+    }
+});
+
 // POST method to update DB
 router.post('/', async (req, res) => {
 	const {EventName, Location, EventDate} = req.body
